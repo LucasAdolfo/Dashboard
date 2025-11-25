@@ -9,6 +9,15 @@ def le_dados():
 
 st.title("🎼 Análise de Músicas")
 
+try:
+    df = le_dados();
+except FileNotFoundError:
+    st.error('Arquivo "dados.csv" não encontrado. Coloque o arquivo na mesma pasta do app ou ajuste o caminho.')
+    st.stop()
+except Exception as e:
+    st.error(f"Erro ao ler 'dados.csv': {e}")
+    st.stop()
+
 # Filtro
 pop_min = st.sidebar.slider("Popularidade mínima", 0, 100, 50)
 df_filt = df[df["track_popularity"] >= pop_min]
@@ -41,6 +50,7 @@ fig2 = px.bar(
 )
 fig2.update_layout(yaxis={'categoryorder':'total ascending'})  
 st.plotly_chart(fig2, use_container_width=True)
+
 
 
 
