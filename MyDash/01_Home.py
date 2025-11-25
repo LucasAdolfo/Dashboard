@@ -10,7 +10,7 @@ st.markdown("""
  Use o menu lateral para navegar entre as páginas.
  """)
 try:
-    df_preview = pd.read_csv("./dados/dados.csv")
+    df_preview = pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
     rows, cols = df_preview.shape
 
     st.markdown(f"""
@@ -54,6 +54,7 @@ st.header("Visão Geral dos Dados Principais")
 df = pd.read_csv("dados.csv")
 
 st.dataframe(df)
+
 
 
 
