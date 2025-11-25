@@ -4,9 +4,12 @@ import plotly.express as px
 
 st.title("🎤 Análise de Artistas")
 
-# ===========================
+
 # LEITURA DO CSV
-# ===========================
+@st.cache_data
+def le_dados():
+    return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
+
 try:
     df = pd.read_csv("dados.csv")
 except FileNotFoundError:
@@ -16,9 +19,9 @@ except Exception as e:
     st.error(f"Erro ao carregar CSV: {e}")
     st.stop()
 
-# ===========================
+
 # VALIDAR COLUNAS NECESSÁRIAS
-# ===========================
+
 required_cols = {
     "artist_name", 
     "artist_followers", 
@@ -35,9 +38,9 @@ if missing:
     st.write("Colunas disponíveis:", list(df.columns))
     st.stop()
 
-# ===========================
+
 # FILTROS
-# ===========================
+
 artistas = df["artist_name"].dropna().unique()
 select_art = st.sidebar.multiselect("Selecione artistas", artistas)
 
@@ -49,9 +52,9 @@ if df.empty:
     st.warning("Nenhum dado disponível após aplicar os filtros.")
     st.stop()
 
-# ===========================
+
 # GRÁFICO: Seguidores x Popularidade
-# ===========================
+
 st.subheader("Popularidade do Artista x Seguidores")
 
 fig = px.scatter(
@@ -66,9 +69,9 @@ fig = px.scatter(
 
 st.plotly_chart(fig, use_container_width=True)
 
-# ===========================
+
 # RANKING DE POPULARIDADE
-# ===========================
+
 st.subheader("Ranking de Artistas por Popularidade Média")
 
 rank = (
@@ -78,4 +81,5 @@ rank = (
 )
 
 st.bar_chart(rank.head(20))
+
 
