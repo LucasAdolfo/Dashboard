@@ -54,9 +54,10 @@ except Exception as e:
 st.header("Visão Geral dos Dados Principais")
 
 
-df = le_dados()pd.read_csv("dados.csv")
+df = le_dados()
 
 st.dataframe(df)
+
 
 
 
