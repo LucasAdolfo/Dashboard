@@ -11,7 +11,7 @@ def le_dados():
     return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
 
 try:
-    df = pd.read_csv("dados.csv")
+    df = le_dados()
 except FileNotFoundError:
     st.error('Arquivo "dados.csv" não encontrado. Coloque o arquivo na mesma pasta do app.')
     st.stop()
@@ -81,5 +81,6 @@ rank = (
 )
 
 st.bar_chart(rank.head(20))
+
 
 
