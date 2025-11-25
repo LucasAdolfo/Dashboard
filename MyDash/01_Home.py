@@ -9,8 +9,11 @@ st.markdown("""
  Bem-vindo ao dashboard!  
  Use o menu lateral para navegar entre as páginas.
  """)
+@st.cache_data
+def le_dados():
+    return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
 try:
-    df_preview = pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
+    df_preview = le_dados()
     rows, cols = df_preview.shape
 
     st.markdown(f"""
@@ -51,9 +54,10 @@ except Exception as e:
 st.header("Visão Geral dos Dados Principais")
 
 
-df = pd.read_csv("dados.csv")
+df = le_dados()pd.read_csv("dados.csv")
 
 st.dataframe(df)
+
 
 
 
