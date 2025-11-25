@@ -8,8 +8,12 @@ st.title("📊 Visão Geral do Dataset")
 # ===========================
 # LEITURA DO CSV (ANTES DE TUDO)
 # ===========================
+@st.cache_data
+def le_dados():
+    return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
+    
 try:
-    df = pd.read_csv("dados.csv")
+    df = le_dados()
 except FileNotFoundError:
     st.error('Arquivo "dados.csv" não encontrado. Coloque o arquivo na mesma pasta do app ou ajuste o caminho.')
     st.stop()
@@ -63,3 +67,4 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig, use_container_width=True)
+
