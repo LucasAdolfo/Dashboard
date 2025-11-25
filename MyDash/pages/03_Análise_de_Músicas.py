@@ -3,7 +3,9 @@ import pandas as pd
 import plotly.express as px
 
 
-df = pd.read_csv("dados.csv")
+@st.cache_data
+def le_dados():
+    return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
 
 st.title("🎼 Análise de Músicas")
 
@@ -39,5 +41,6 @@ fig2 = px.bar(
 )
 fig2.update_layout(yaxis={'categoryorder':'total ascending'})  
 st.plotly_chart(fig2, use_container_width=True)
+
 
 
