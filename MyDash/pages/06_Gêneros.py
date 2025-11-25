@@ -3,7 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 #CSV
-df = pd.read_csv("dados.csv")
+@st.cache_data
+def le_dados():
+    return pd.read_csv("https://raw.githubusercontent.com/LucasAdolfo/Dashboard/refs/heads/main/MyDash/dados.csv")
+df = le_dados();
 
 df["genre"] = df["artist_genres"].astype(str).str.split(",").str[0]
 
@@ -23,3 +26,4 @@ st.subheader("Popularidade por Gênero")
 media = df.groupby("genre")["track_popularity"].mean().sort_values(ascending=False)
 
 st.bar_chart(media.head(15))
+
